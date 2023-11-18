@@ -2,7 +2,7 @@
 import pytest
 from pytest_django.asserts import assertTemplateUsed
 from django.test import Client
-from django.urls import reverse
+from django.urls import reverse, resolve
 from .models import Address, Letting
 
 # Create your tests here.
@@ -60,12 +60,22 @@ def test_letting_view():
 
 @pytest.mark.django_db
 def test_letting_index_url():
-    pass
+    Letting.objects.create()
+    path = reverse('lettings_index')
+    
+    assert path == "lettings/"
+    assert resolve(path).view_name == "lettings_index"
 
 
 @pytest.mark.django_db
 def test_letting_url():
-    pass
+    Letting.objects.create()
+    path = reverse('letting', kwargs={'letting_id':1})
+    
+    assert path == "lettings/1"
+    assert resolve(path).view_name == "letting"
+
+
 """ 
 @pytest.mark.django_db  
 def test_book_model():
