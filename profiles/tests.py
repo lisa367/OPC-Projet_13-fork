@@ -18,12 +18,31 @@ def test_profile_model():
 
 @pytest.mark.django_db 
 def test_profile_index_view():
-    pass
+    client = Client()
+    Profile.objects.create()
+    path = reverse('profiles_index')
+    response = client.get(path)
+    content = response.content.decode()
+    expected_content = ""
+
+    assert content == expected_content
+    assert response.status_code == 200
+    assertTemplateUsed(response, "profiles/index.html")
 
 
 @pytest.mark.django_db 
 def test_profile_view():
-    pass
+    client = Client()
+    user = User.objects.create(username = "test_user2", email="test_user2@fauxmail.com" )
+    Profile.objects.create()
+    path = reverse('profile',  kwargs={'username':"test_user3"})
+    response = client.get(path)
+    content = response.content.decode()
+    expected_content = ""
+
+    assert content == expected_content
+    assert response.status_code == 200
+    assertTemplateUsed(response, "profiles/profile.html")
 
 
 @pytest.mark.django_db 
@@ -37,9 +56,9 @@ def test_profile_index_url():
 
 @pytest.mark.django_db 
 def test_profile_url():
-    user = User.objects.create(username = "test_user2", email="test_user2@fauxmail.com" )
+    user = User.objects.create(username = "test_user3", email="test_user3@fauxmail.com" )
     Profile.objects.create()
-    path = reverse('profile', kwargs={'username':"test_user2"})
+    path = reverse('profile', kwargs={'username':"test_user3"})
     
-    assert path == "profiles/1"
+    assert path == "profiles/3"
     assert resolve(path).view_name == "profile"
