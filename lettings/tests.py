@@ -1,6 +1,8 @@
 # from django.test import TestCase
 import pytest
+from pytest_django.asserts import assertTemplateUsed
 from django.test import Client
+from django.urls import reverse
 from .models import Address, Letting
 
 # Create your tests here.
@@ -28,18 +30,40 @@ def test_letting_model():
     assert str(address) == expected_value
 
 
+@pytest.mark.django_db
 def test_letting_index_view():
-    pass
+    client = Client()
+    Letting.objects.create()
+    path = reverse('lettings_index')
+    response = client.get(path)
+    content = response.content.decode()
+    expected_content = ""
+
+    assert content == expected_content
+    assert response.status_code == 200
+    assertTemplateUsed(response, "lettings/index.html")
 
 
+@pytest.mark.django_db
 def test_letting_view():
-    pass
+    client = Client()
+    Letting.objects.create()
+    path = reverse('letting',  kwargs={'letting_id':1})
+    response = client.get(path)
+    content = response.content.decode()
+    expected_content = ""
+
+    assert content == expected_content
+    assert response.status_code == 200
+    assertTemplateUsed(response, "lettings/letting.html")
 
 
+@pytest.mark.django_db
 def test_letting_index_url():
     pass
 
 
+@pytest.mark.django_db
 def test_letting_url():
     pass
 """ 

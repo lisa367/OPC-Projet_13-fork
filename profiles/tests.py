@@ -1,6 +1,7 @@
 # from django.test import TestCase
 import pytest
 from django.test import Client
+from pytest_django.asserts import assertTemplateUsed
 from .models import Profile
 from django.contrib.auth.models import User
 
