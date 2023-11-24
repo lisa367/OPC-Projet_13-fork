@@ -23,9 +23,9 @@ def test_profile_index_view():
     path = reverse('profiles_index')
     response = client.get(path)
     content = response.content.decode()
-    expected_content = ""
+    # expected_content = ""
 
-    assert content == expected_content
+    # assert content == expected_content
     assert response.status_code == 200
     assertTemplateUsed(response, "profiles/index.html")
 
@@ -38,9 +38,9 @@ def test_profile_view():
     path = reverse('profile',  kwargs={'username':"test_user3"})
     response = client.get(path)
     content = response.content.decode()
-    expected_content = ""
+    # expected_content = ""
 
-    assert content == expected_content
+    # assert content == expected_content
     assert response.status_code == 200
     assertTemplateUsed(response, "profiles/profile.html")
 

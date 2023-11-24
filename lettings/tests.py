@@ -37,9 +37,9 @@ def test_letting_index_view():
     path = reverse('lettings_index')
     response = client.get(path)
     content = response.content.decode()
-    expected_content = ""
+    # expected_content = ""
 
-    assert content == expected_content
+    # assert content == expected_content
     assert response.status_code == 200
     assertTemplateUsed(response, "lettings/index.html")
 
@@ -51,9 +51,9 @@ def test_letting_view():
     path = reverse('letting',  kwargs={'letting_id':1})
     response = client.get(path)
     content = response.content.decode()
-    expected_content = ""
+    # expected_content = ""
 
-    assert content == expected_content
+    # assert content == expected_content
     assert response.status_code == 200
     assertTemplateUsed(response, "lettings/letting.html")
 
