@@ -5,7 +5,26 @@ from django.test import Client
 from django.urls import reverse, resolve
 from .models import Address, Letting
 
-# Create your tests here.
+
+@pytest.fixture
+@pytest.mark.django_db
+def fake_db():
+    address = Address.objects.create(
+            number = 55,
+            street = "rue du Fbg Saint-Honoré",
+            city = "Paris",
+            state = "FRANCE",
+            zip_code = 75008,
+            country_iso_code = "FR")
+    
+    letting_site = Letting.objects.create(
+            title = "Presidential private hotel in Paris",
+            address_id = 1)
+    
+    return {"address": address, "letting_site": letting_site}
+
+
+
 @pytest.mark.django_db  
 def test_address_model():
     client = Client()
@@ -21,19 +40,19 @@ def test_address_model():
 
 
 @pytest.mark.django_db 
-def test_letting_model():
+def test_letting_model(fake_db):
     client = Client()
     address = Letting.objects.create(
             title = "Luxury private hotel in Paris",
-            address = 1)
+            address_id = 1)
     expected_value = "Luxury private hotel in Paris"
     assert str(address) == expected_value
 
 
 @pytest.mark.django_db
-def test_letting_index_view():
+def test_letting_index_view(fake_db):
     client = Client()
-    Letting.objects.create()
+    # Letting.objects.create()
     path = reverse('lettings_index')
     response = client.get(path)
     content = response.content.decode()
@@ -44,10 +63,10 @@ def test_letting_index_view():
     assertTemplateUsed(response, "lettings/index.html")
 
 
-@pytest.mark.django_db
-def test_letting_view():
+# @pytest.mark.django_db
+def test_letting_view(fake_db):
     client = Client()
-    Letting.objects.create()
+    # Letting.objects.create()
     path = reverse('letting',  kwargs={'letting_id':1})
     response = client.get(path)
     content = response.content.decode()
@@ -58,18 +77,18 @@ def test_letting_view():
     assertTemplateUsed(response, "lettings/letting.html")
 
 
-@pytest.mark.django_db
-def test_letting_index_url():
-    Letting.objects.create()
+# @pytest.mark.django_db
+def test_letting_index_url(fake_db):
+    # Letting.objects.create()
     path = reverse('lettings_index')
     
     assert path == "lettings/"
     assert resolve(path).view_name == "lettings_index"
 
 
-@pytest.mark.django_db
-def test_letting_url():
-    Letting.objects.create()
+# @pytest.mark.django_db
+def test_letting_url(fake_db):
+    # Letting.objects.create()
     path = reverse('letting', kwargs={'letting_id':1})
     
     assert path == "lettings/1"
