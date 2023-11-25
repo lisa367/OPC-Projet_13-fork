@@ -1,9 +1,10 @@
+
+""" 
 from django.db import models
 from django.core.validators import MaxValueValidator, MinLengthValidator
 from django.contrib.auth.models import User
 
-
-""" class Address(models.Model):
+class Address(models.Model):
     number = models.PositiveIntegerField(validators=[MaxValueValidator(9999)])
     street = models.CharField(max_length=64)
     city = models.CharField(max_length=64)
