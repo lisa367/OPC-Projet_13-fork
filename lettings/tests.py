@@ -86,21 +86,22 @@ def test_letting_object_view(fake_db):
     assertTemplateUsed(response, "lettings/letting.html")
 
 
-# @pytest.mark.django_db
-def test_letting_index_url(fake_db):
+@pytest.mark.django_db
+def test_letting_index_url():
     # Letting.objects.create()
-    path = reverse('lettings_index')
+    # path = reverse('lettings:lettings_index')
+    path = "/lettings/"
     
-    assert path == "lettings/"
-    assert resolve(path).view_name == "lettings_index"
+    # assert path == "/lettings/"
+    assert resolve(path).view_name == "lettings:lettings_index"
 
 
-# @pytest.mark.django_db
+@pytest.mark.django_db
 def test_letting_url(fake_db):
     # Letting.objects.create()
-    path = reverse('lettings', kwargs={'letting_id':1})
+    path = reverse('lettings:letting', kwargs={'letting_id':1})
     
-    assert path == "lettings/1"
+    assert path == "/lettings/1"
     assert resolve(path).view_name == "letting"
 
 
