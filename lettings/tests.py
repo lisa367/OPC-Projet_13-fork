@@ -19,54 +19,35 @@ def fake_db():
             zip_code = 75008,
             country_iso_code = "FR")
     
-    letting_site = Letting.objects.create(
-            title = "Presidential private hotel in Paris",
+    letting = Letting.objects.create(
+            title = "Presidential private residence in Paris",
             address_id = 1)
     
-    return {"address": address, "letting_site": letting_site}
+    return {"address": address, "letting": letting}
 
 
 
 @pytest.mark.django_db  
-def test_address_model():
-    address = Address.objects.create(
-            number = 55,
-            street = "rue du Fbg Saint-Honoré",
-            city = "Paris",
-            state = "FRANCE",
-            zip_code = 75008,
-            country_iso_code = "FR")
+def test_address_model(fake_db):
+    address_object = fake_db["address"]
     expected_value = "55 rue du Fbg Saint-Honoré"
-    assert str(address) == expected_value
+    assert str(address_object) == expected_value
 
 
 @pytest.mark.django_db 
-def test_letting_model():
-    address = Address.objects.create(
-            number = 55,
-            street = "rue du Fbg Saint-Honoré",
-            city = "Paris",
-            state = "FRANCE",
-            zip_code = 75008,
-            country_iso_code = "FR")
-    
-    address = Letting.objects.create(
-            title = "Luxury private hotel in Paris",
-            address_id = 1)
-    expected_value = "Luxury private hotel in Paris"
-    assert str(address) == expected_value
+def test_letting_model(fake_db):
+    letting_object = fake_db["letting"]
+    expected_value = "Presidential private residence in Paris"
+    assert str(letting_object) == expected_value
 
 
 @pytest.mark.django_db
 def test_lettings_index_view():
     client = Client()
-    # Letting.objects.create()
-    # path = reverse('lettings_index')
     path = reverse("lettings:lettings_index")
     response = client.get(path)
     content = response.content.decode()
     # expected_content = ""
-
     # assert content == expected_content
     assert response.status_code == 200
     assertTemplateUsed(response, "lettings/index.html")
@@ -75,12 +56,10 @@ def test_lettings_index_view():
 @pytest.mark.django_db
 def test_letting_object_view(fake_db):
     client = Client()
-    # Letting.objects.create()
     path = reverse('lettings:letting',  kwargs={'letting_id':1})
     response = client.get(path)
     content = response.content.decode()
     # expected_content = ""
-
     # assert content == expected_content
     assert response.status_code == 200
     assertTemplateUsed(response, "lettings/letting.html")
@@ -108,7 +87,10 @@ def test_letting_url(fake_db):
 
 
 @pytest.mark.django_db
-def test_wrong_letting_object():
+def test_wrong_letting_object(fake_db):
+    # Checks if the id of a non-existing object in the url triggers an error and the use of the customized error template
+    # base_url/lettings/0
+
     if DEBUG == False:
         client = Client()
         wrong_object_url = reverse("lettings", kwargs={"letting_id": 0})
@@ -122,6 +104,36 @@ def test_wrong_letting_object():
 
 
 """ 
+@pytest.mark.django_db  
+def test_address_model():
+    address = Address.objects.create(
+            number = 55,
+            street = "rue du Fbg Saint-Honoré",
+            city = "Paris",
+            state = "FRANCE",
+            zip_code = 75008,
+            country_iso_code = "FR")
+    expected_value = "55 rue du Fbg Saint-Honoré"
+    assert str(address) == expected_value
+
+    
+@pytest.mark.django_db 
+def test_letting_model():
+    address = Address.objects.create(
+            number = 55,
+            street = "rue du Fbg Saint-Honoré",
+            city = "Paris",
+            state = "FRANCE",
+            zip_code = 75008,
+            country_iso_code = "FR")
+    
+    address = Letting.objects.create(
+            title = "Luxury private hotel in Paris",
+            address_id = 1)
+    expected_value = "Luxury private hotel in Paris"
+    assert str(address) == expected_value
+
+
 @pytest.mark.django_db  
 def test_book_model():
     client = Client()
