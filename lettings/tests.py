@@ -57,11 +57,12 @@ def test_letting_model():
     assert str(address) == expected_value
 
 
-# @pytest.mark.django_db
-def test_letting_index_view(fake_db):
+@pytest.mark.django_db
+def test_letting_index_view():
     client = Client()
     # Letting.objects.create()
-    path = reverse('lettings_index')
+    # path = reverse('lettings_index')
+    path = reverse("lettings:lettings_index")
     response = client.get(path)
     content = response.content.decode()
     # expected_content = ""
@@ -72,17 +73,17 @@ def test_letting_index_view(fake_db):
 
 
 # @pytest.mark.django_db
-def test_letting_view(fake_db):
+def test_letting_object_view():
     client = Client()
     # Letting.objects.create()
-    path = reverse('lettings',  kwargs={'letting_id':1})
+    path = reverse('lettings:letting',  kwargs={'letting_id':1})
     response = client.get(path)
     content = response.content.decode()
     # expected_content = ""
 
     # assert content == expected_content
     assert response.status_code == 200
-    assertTemplateUsed(response, "lettings/letting.html")
+    assertTemplateUsed(response, "letting.html")
 
 
 # @pytest.mark.django_db
