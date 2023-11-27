@@ -7,6 +7,25 @@ from .models import Profile
 from django.contrib.auth.models import User
 
 # Create your tests here.
+@pytest.fixture
+@pytest.mark.django_db
+def fake_db():
+    user = User.objects.create(
+            password = "ABc1234!",
+            username = "best_boss",
+            first_name = "Michael",
+            last_name = "Scott",
+            email = "m.scott@dundermifflin.com")
+    
+    profile = Profile.objects.create(
+            user_id = 1,
+            favorite_city = "Paris")
+    
+    return {"user": user, "profile": profile}
+
+
+
+
 @pytest.mark.django_db 
 def test_profile_model():
     client = Client()
