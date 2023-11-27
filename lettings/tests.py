@@ -3,7 +3,9 @@ import pytest
 from pytest_django.asserts import assertTemplateUsed
 from django.test import Client
 from django.urls import reverse, resolve
+
 from .models import Address, Letting
+from oc_lettings_site.settings import DEBUG
 
 
 @pytest.fixture
@@ -27,7 +29,6 @@ def fake_db():
 
 @pytest.mark.django_db  
 def test_address_model():
-    client = Client()
     address = Address.objects.create(
             number = 55,
             street = "rue du Fbg Saint-Honoré",
@@ -40,8 +41,15 @@ def test_address_model():
 
 
 @pytest.mark.django_db 
-def test_letting_model(fake_db):
-    client = Client()
+def test_letting_model():
+    address = Address.objects.create(
+            number = 55,
+            street = "rue du Fbg Saint-Honoré",
+            city = "Paris",
+            state = "FRANCE",
+            zip_code = 75008,
+            country_iso_code = "FR")
+    
     address = Letting.objects.create(
             title = "Luxury private hotel in Paris",
             address_id = 1)
@@ -49,7 +57,7 @@ def test_letting_model(fake_db):
     assert str(address) == expected_value
 
 
-@pytest.mark.django_db
+# @pytest.mark.django_db
 def test_letting_index_view(fake_db):
     client = Client()
     # Letting.objects.create()
@@ -67,7 +75,7 @@ def test_letting_index_view(fake_db):
 def test_letting_view(fake_db):
     client = Client()
     # Letting.objects.create()
-    path = reverse('letting',  kwargs={'letting_id':1})
+    path = reverse('lettings',  kwargs={'letting_id':1})
     response = client.get(path)
     content = response.content.decode()
     # expected_content = ""
@@ -89,10 +97,26 @@ def test_letting_index_url(fake_db):
 # @pytest.mark.django_db
 def test_letting_url(fake_db):
     # Letting.objects.create()
-    path = reverse('letting', kwargs={'letting_id':1})
+    path = reverse('lettings', kwargs={'letting_id':1})
     
     assert path == "lettings/1"
     assert resolve(path).view_name == "letting"
+
+
+
+
+@pytest.mark.django_db
+def test_wrong_letting_object():
+    if DEBUG == False:
+        client = Client()
+        wrong_object_url = reverse("lettings", kwargs={"letting_id": 0})
+        response = client.get(wrong_object_url)
+        content = response.content.decode()
+
+        assert response.status_code == 500
+        assert assertTemplateUsed(response, "templates/500.html")
+
+
 
 
 """ 
