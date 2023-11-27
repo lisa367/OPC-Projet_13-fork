@@ -58,7 +58,7 @@ def test_letting_model():
 
 
 @pytest.mark.django_db
-def test_letting_index_view():
+def test_lettings_index_view():
     client = Client()
     # Letting.objects.create()
     # path = reverse('lettings_index')
@@ -87,22 +87,22 @@ def test_letting_object_view(fake_db):
 
 
 @pytest.mark.django_db
-def test_letting_index_url():
-    # Letting.objects.create()
-    # path = reverse('lettings:lettings_index')
-    path = "/lettings/"
+def test_lettings_index_url():
+    # Checks if the url named 'lettings_index' uses the 'index' view of the app lettings
+    path = reverse('lettings:lettings_index')
+    # path = "/lettings/"
     
-    # assert path == "/lettings/"
+    assert path == "/lettings/"
     assert resolve(path).view_name == "lettings:lettings_index"
 
 
 @pytest.mark.django_db
 def test_letting_url(fake_db):
-    # Letting.objects.create()
+    # Checks if the 'letting' url uses the 'letting' view of the app lettings
     path = reverse('lettings:letting', kwargs={'letting_id':1})
-    
-    assert path == "/lettings/1"
-    assert resolve(path).view_name == "letting"
+    # path = "/lettings/1"
+    assert path == "/lettings/1/"
+    assert resolve(path).view_name == "lettings:letting"
 
 
 
