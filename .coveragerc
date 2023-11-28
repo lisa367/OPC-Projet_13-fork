@@ -1,0 +1,15 @@
+[run]
+source = .
+
+omit = 
+    .env/*
+    static/*
+    templates/*
+    **/tests.py
+    **/migrations/*
+    oc_lettings_site/settings
+    **/admin.py
+    **/asgi.py
+    **/wsgi.py
+    **/apps.py
+    manage.py
