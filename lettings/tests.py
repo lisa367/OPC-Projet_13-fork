@@ -67,7 +67,7 @@ def test_letting_object_view(fake_db):
 
 @pytest.mark.django_db
 def test_lettings_index_url():
-    # Checks if the url named 'lettings_index' uses the 'index' view of the app lettings
+    # Checks if the url named 'lettings_index' uses the 'lettings_index' view of the app lettings
     path = reverse('lettings:lettings_index')
     # path = "/lettings/"
     
@@ -77,7 +77,7 @@ def test_lettings_index_url():
 
 @pytest.mark.django_db
 def test_letting_url(fake_db):
-    # Checks if the 'letting' url uses the 'letting' view of the app lettings
+    # Checks if the url named 'letting' ¸ uses the 'letting' view of the app lettings
     path = reverse('lettings:letting', kwargs={'letting_id':1})
     # path = "/lettings/1"
     assert path == "/lettings/1/"
@@ -93,7 +93,7 @@ def test_wrong_letting_object(fake_db):
 
     if DEBUG == False:
         client = Client()
-        wrong_object_url = reverse("lettings", kwargs={"letting_id": 0})
+        wrong_object_url = reverse("lettings:letting", kwargs={"letting_id": 0})
         response = client.get(wrong_object_url)
         content = response.content.decode()
 
