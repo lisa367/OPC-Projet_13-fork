@@ -24,14 +24,10 @@ def fake_db():
     return {"user": user, "profile": profile}
 
 
-
-
 @pytest.mark.django_db 
-def test_profile_model():
-    client = Client()
-    user = User.objects.create(username = "test_user", email="test_user@fauxmail.com" )
-    profile = Profile.objects.create(user=user.pk, favorite_city="Paris")
-    expected_value = "test_user"
+def test_profile_model(fake_db):
+    profile = fake_db["profile"]
+    expected_value = "best_boss"
     assert str(profile) == expected_value
 
 
@@ -81,3 +77,16 @@ def test_profile_url():
     
     assert path == "profiles/3"
     assert resolve(path).view_name == "profile"
+
+
+
+'''
+@pytest.mark.django_db 
+def test_profile_model():
+    client = Client()
+    user = User.objects.create(username = "test_user", email="test_user@fauxmail.com" )
+    profile = Profile.objects.create(user=user.pk, favorite_city="Paris")
+    expected_value = "test_user"
+    assert str(profile) == expected_value
+
+'''
