@@ -119,7 +119,10 @@ STATICFILES_DIRS = [BASE_DIR / "static",]
 
 
 sentry_sdk.init(
-    dsn="https://examplePublicKey@o0.ingest.sentry.io/0",
+    # dsn="https://examplePublicKey@o0.ingest.sentry.io/0",
+    dsn="https://68bfc3daa05f8f7ee1a932ac1161f71b@o4506244442554368.ingest.sentry.io/4506270374494208",
+    traces_sample_rate=1.0,
+    profiles_sample_rate=1.0,
     enable_tracing=True,
     integrations=[
         DjangoIntegration(
