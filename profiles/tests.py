@@ -3,8 +3,11 @@ import pytest
 from django.test import Client
 from pytest_django.asserts import assertTemplateUsed
 from django.urls import reverse, resolve
-from .models import Profile
+
 from django.contrib.auth.models import User
+from .models import Profile
+from oc_lettings_site.settings import DEBUG
+
 
 # Create your tests here.
 @pytest.fixture
@@ -32,10 +35,9 @@ def test_profile_model(fake_db):
 
 
 @pytest.mark.django_db 
-def test_profile_index_view():
+def test_profiles_index_view():
     client = Client()
-    Profile.objects.create()
-    path = reverse('profiles_index')
+    path = reverse('profiles:profiles_index')
     response = client.get(path)
     content = response.content.decode()
     # expected_content = ""
@@ -46,11 +48,10 @@ def test_profile_index_view():
 
 
 @pytest.mark.django_db 
-def test_profile_view():
+def test_profile_view(fake_db):
     client = Client()
-    user = User.objects.create(username = "test_user2", email="test_user2@fauxmail.com" )
-    Profile.objects.create()
-    path = reverse('profile',  kwargs={'username':"test_user3"})
+    user = fake_db["user"]
+    path = reverse('profiles:profile',  kwargs={'username':user.username})
     response = client.get(path)
     content = response.content.decode()
     # expected_content = ""
@@ -61,22 +62,35 @@ def test_profile_view():
 
 
 @pytest.mark.django_db 
-def test_profile_index_url():
-    Profile.objects.create()
-    path = reverse('profiles_index')
-    
-    assert path == "profiles/"
-    assert resolve(path).view_name == "profiles_index"
+def test_profiles_index_url():
+    # Checks if the url named 'profiles_index' uses the 'profiles_index' view of the app lettings
+    path = reverse('profiles:profiles_index')
+    assert path == "/profiles/"
+    assert resolve(path).view_name == "profiles:profiles_index"
 
 
 @pytest.mark.django_db 
-def test_profile_url():
-    user = User.objects.create(username = "test_user3", email="test_user3@fauxmail.com" )
-    Profile.objects.create()
-    path = reverse('profile', kwargs={'username':"test_user3"})
-    
-    assert path == "profiles/3"
-    assert resolve(path).view_name == "profile"
+def test_profile_url(fake_db):
+    # Checks if the url named 'profile' uses the 'profile' view of the app profiles
+    user = fake_db["user"]
+    path = reverse('profiles:profile', kwargs={'username':user.username})
+    assert path == "/profiles/best_boss/"
+    assert resolve(path).view_name == "profiles:profile"
+
+
+@pytest.mark.django_db
+def test_wrong_profile_object(fake_db):
+    # Checks if the username of a non-existing user in the url triggers an error and the use of the customized error template
+    # base_url/profile/"nobody"
+
+    if DEBUG == False:
+        client = Client()
+        wrong_object_url = reverse("profiles:profile", kwargs={"username": "nobody"})
+        response = client.get(wrong_object_url)
+        content = response.content.decode()
+
+        assert response.status_code == 500
+        assert assertTemplateUsed(response, "templates/500.html")
 
 
 
