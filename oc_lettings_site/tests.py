@@ -4,6 +4,7 @@ from pytest_django.asserts import assertTemplateUsed
 from django.test import Client
 from django.urls import reverse, resolve
 
+
 # Create your tests here. 
 def test_index_view():
     client = Client()
@@ -23,7 +24,6 @@ def test_index_url():
     path = reverse('index')
     assert path == "/"
     assert resolve(path).view_name == "index"
-
 
 
 """ 
