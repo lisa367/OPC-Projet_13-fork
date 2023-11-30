@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('lettings', '0002_auto_20231121_0321'),
     ]
-
+''' 
     operations = [
         migrations.AlterModelOptions(
             name='letting',
@@ -84,3 +84,10 @@ class Migration(migrations.Migration):
         """),
 
     ]
+'''
+operations = [
+        migrations.AlterModelOptions(
+            name='letting',
+            options={'verbose_name_plural': 'Lettings'},
+        ),
+]

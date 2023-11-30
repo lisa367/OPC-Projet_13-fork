@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('profiles', '0002_auto_20231121_0321'),
     ]
-
+'''
     operations = [
         migrations.AlterModelOptions(
             name='profile',
@@ -41,3 +41,11 @@ class Migration(migrations.Migration):
                 oc_lettings_site_profile;
         """),
     ]
+'''
+
+operations = [
+        migrations.AlterModelOptions(
+            name='profile',
+            options={'verbose_name_plural': 'Profiles'},
+        ),
+]
