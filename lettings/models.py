@@ -2,8 +2,32 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinLengthValidator
 
 
-# Create your models here.
 class Address(models.Model):
+    """
+    Class to create an address object in the database
+
+    ...
+
+    Attributes
+    ----------
+    number : int
+        first name of the person
+    street : str
+        family name of the person
+    city : str
+        age of the person
+    state : str
+        first name of the person
+    zip_code : int
+        family name of the person
+    country_iso_code : str
+        age of the person
+
+    Methods
+    -------
+    __str__:
+        Prints the string representation of an address object
+    """
     number = models.PositiveIntegerField(validators=[MaxValueValidator(9999)])
     street = models.CharField(max_length=64)
     city = models.CharField(max_length=64)
