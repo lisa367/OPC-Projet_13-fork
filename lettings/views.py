@@ -18,6 +18,15 @@ def lettings_index(request):
 
 # View to display the details of one particular letting
 def letting(request, letting_id):
+    """View to display the details of one particular letting object from the database
+
+    Args:
+        request (_type_): The request pqssed from the url
+        letting_id (int): The id of the letting to retrieve from the database, passed as a url argument
+
+    Returns:
+        _type_: Returns the template that displays the information of one letting object
+    """
     letting = Letting.objects.get(id=letting_id)
     context = {
         'title': letting.title,
