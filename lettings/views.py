@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 from .models import Letting
 
-# View to display the list of all the lettings in the database
+
 def lettings_index(request):
     """View to display the list of all the lettings in the database
 
@@ -16,7 +16,6 @@ def lettings_index(request):
     return render(request, 'lettings/index.html', context)
 
 
-# View to display the details of one particular letting
 def letting(request, letting_id):
     """View to display the details of one particular letting object from the database
 
