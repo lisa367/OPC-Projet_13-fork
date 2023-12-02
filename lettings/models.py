@@ -44,7 +44,7 @@ class Address(models.Model):
 
 class Letting(models.Model):
     """
-    Class to create an letting object in the database
+    Class to create a letting object in the database
 
     ...
 
