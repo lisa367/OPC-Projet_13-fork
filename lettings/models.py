@@ -43,6 +43,23 @@ class Address(models.Model):
 
 
 class Letting(models.Model):
+    """
+    Class to create an letting object in the database
+
+    ...
+
+    Attributes
+    ----------
+    title : str
+        title given to the letting
+    address : int
+        foreign key of the address of the letting
+
+    Methods
+    -------
+    __str__:
+        Prints the string representation of an letting object
+    """
     title = models.CharField(max_length=256)
     address = models.OneToOneField(Address, on_delete=models.CASCADE)
 
