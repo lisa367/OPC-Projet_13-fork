@@ -17,7 +17,7 @@ class Profile(models.Model):
 
     Methods
     -------
-    __str__:
+    __str__():
         Prints the string representation of an profile object
     """
     user = models.OneToOneField(User, on_delete=models.CASCADE)
