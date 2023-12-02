@@ -11,17 +11,17 @@ class Address(models.Model):
     Attributes
     ----------
     number : int
-        first name of the person
+        number of the street of the address
     street : str
-        family name of the person
+        name of the street of the address
     city : str
-        age of the person
+        city of the address
     state : str
-        first name of the person
+        state of the address
     zip_code : int
-        family name of the person
+        zip code of the address
     country_iso_code : str
-        age of the person
+        coustry ISO code of the address
 
     Methods
     -------
