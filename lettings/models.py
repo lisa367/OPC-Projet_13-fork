@@ -25,7 +25,7 @@ class Address(models.Model):
 
     Methods
     -------
-    __str__:
+    __str__():
         Prints the string representation of an address object
     """
     number = models.PositiveIntegerField(validators=[MaxValueValidator(9999)])
@@ -57,7 +57,7 @@ class Letting(models.Model):
 
     Methods
     -------
-    __str__:
+    __str__():
         Prints the string representation of an letting object
     """
     title = models.CharField(max_length=256)
