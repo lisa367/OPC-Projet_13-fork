@@ -1,7 +1,7 @@
 FROM ubuntu
 RUN apt-get install git
 
-WORKDIR /OPC-Projet_13
+# WORKDIR /OPC-Projet_13
 
 # RUN git clone 
 RUN pyton3 -m venv venv
