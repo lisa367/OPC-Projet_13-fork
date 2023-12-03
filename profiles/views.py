@@ -17,6 +17,15 @@ def profiles_index(request):
 
 
 def profile(request, username):
+    """View to display the details of one profile object from the database
+
+    Args:
+        request (_type_): The request pqssed from the url
+        username (int): The username of user associated with the profile to retrieve from the database, passed as a url argument
+
+    Returns:
+        _type_: Returns the template that displays the information of one profile object
+    """
     profile = Profile.objects.get(user__username=username)
     context = {'profile': profile}
     return render(request, 'profiles/profile.html', context)

@@ -17,7 +17,7 @@ def lettings_index(request):
 
 
 def letting(request, letting_id):
-    """View to display the details of one particular letting object from the database
+    """View to display the details of one letting object from the database
 
     Args:
         request (_type_): The request pqssed from the url
