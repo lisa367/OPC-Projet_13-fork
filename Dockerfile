@@ -5,11 +5,12 @@ RUN apt-get install -y python3-pip
 # RUN apt-get install -y git
 # WORKDIR /OPC-Projet_13
 COPY . .
+
 # RUN git clone 
 RUN pyton3 -m venv venv
-# COPY requirements.txt requirements.txt
+RUN source venv/bin/activate
 RUN pip install -r requirements.txt
 
 
 
-CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
+CMD ["python", "manage.py", "runserver"]
