@@ -19,6 +19,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
+# SECRET_KEY = os.environ.get("SECRET_KEY", "secret_key")
+# DEBUG = os.environ.get("DEBUG", True)
+# ALLOWED_HOSTS = [".onrender.com", "localhost", "127.0.0.1"]
+
 
 # Application definition
 
