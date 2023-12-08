@@ -5,12 +5,11 @@ apt-get install -y git && \
 apt-get install -y python3.8.3 && \
 apt-get install -y python3-pip
 RUN apt-get python3.10-venv
-# RUN apt-get install -y git
-WORKDIR /OPC-Projet_13
+# RUN git clone https://github.com/lisa367/OPC-Projet_13.git 
 
+WORKDIR /OPC-Projet_13
 COPY . $WORKDIR
 
-# RUN git clone https://github.com/lisa367/OPC-Projet_13.git 
 RUN python3 -m venv venv
 RUN . venv/bin/activate
 RUN pip install -r requirements.txt
