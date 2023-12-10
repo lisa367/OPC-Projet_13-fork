@@ -17,4 +17,4 @@ RUN pip install -r requirements.txt
 
 # ENTRYPOINT ["gunicorn", "core.wsgi"]
 # CMD ["python", "manage.py", "runserver"]
-CMD ["pwd && ls -a"]
+CMD ["ls", "-a"]
