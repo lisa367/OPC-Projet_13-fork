@@ -1,8 +1,10 @@
 import os
 import sentry_sdk
 from sentry_sdk.integrations.django import DjangoIntegration
-
+from dotenv import load_dotenv
 from pathlib import Path
+
+load_dotenv()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,15 +14,16 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
+# SECRET_KEY = 'fp$9^593hsriajg$_%=5trot9g!1qa@ew(o-1#@=&4%=hp46(s'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# SECRET_KEY = os.environ.get("SECRET_KEY", "secret_key")
-# DEBUG = os.environ.get("DEBUG", True)
+SECRET_KEY = os.environ.get('SECRET_KEY', 'secret_key')
+DEBUG = os.environ.get('DEBUG', True)
+DSN = os.environ.get('DSN')
 # ALLOWED_HOSTS = [".onrender.com", "localhost", "127.0.0.1"]
 
 
@@ -127,7 +130,8 @@ STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 sentry_sdk.init(
     # dsn="https://examplePublicKey@o0.ingest.sentry.io/0",
-    dsn="https://68bfc3daa05f8f7ee1a932ac1161f71b@o4506244442554368.ingest.sentry.io/4506270374494208",
+    # dsn="https://68bfc3daa05f8f7ee1a932ac1161f71b@o4506244442554368.ingest.sentry.io/4506270374494208",
+    dsn=DSN,
     traces_sample_rate=1.0,
     profiles_sample_rate=1.0,
     enable_tracing=True,
