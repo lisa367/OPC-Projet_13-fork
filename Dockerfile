@@ -2,14 +2,15 @@ FROM python:3.8.6-alpine
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
-EXPOSE 8000
+
 
 WORKDIR /OPC-Projet_13
 COPY . $WORKDIR
 RUN pip install -r requirements.txt
 
-# ENTRYPOINT ["gunicorn", "core.wsgi"]
-CMD ["python", "manage.py", "runserver", "127.0.0.1:8000"]
+ENTRYPOINT ["gunicorn", "core.wsgi"]
+# EXPOSE 8000
+# CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
 
 # FROM ubuntu
