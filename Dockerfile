@@ -8,7 +8,7 @@ WORKDIR /OPC-Projet_13
 COPY . $WORKDIR
 RUN pip install -r requirements.txt
 
-ENTRYPOINT ["gunicorn", "core.wsgi"]
+ENTRYPOINT ["gunicorn", "oc_lettings_site.wsgi"]
 # EXPOSE 8000
 # CMD ["python", "manage.py", "runserver", "0.0.0.0:8000"]
 
