@@ -1,38 +1,39 @@
-Lettings app
+Profiles app
 ================
+
 
 .. toctree::
    :maxdepth: 4
 
 
-lettings.models
+profiles.models
 ----------------------
 
-.. automodule:: lettings.models
+.. automodule:: profiles.models
    :members:
    :undoc-members:
    :show-inheritance:
 
-lettings.tests
+profiles.tests
 ---------------------
 
-.. automodule:: lettings.tests
+.. automodule:: profiles.tests
    :members:
    :undoc-members:
    :show-inheritance:
 
-lettings.urls
+profiles.urls
 --------------------
 
-.. automodule:: lettings.urls
+.. automodule:: profiles.urls
    :members:
    :undoc-members:
    :show-inheritance:
 
-lettings.views
+profiles.views
 ---------------------
 
-.. automodule:: lettings.views
+.. automodule:: profiles.views
    :members:
    :undoc-members:
    :show-inheritance:
@@ -40,7 +41,7 @@ lettings.views
 Module contents
 ---------------
 
-.. automodule:: lettings
+.. automodule:: profiles
    :members:
    :undoc-members:
    :show-inheritance:
