@@ -15,11 +15,11 @@ jobs:
         - python/install-packages:
             pkg-manager: pip
         - run:
-            name: Pytest-tests
+            name: pytest-tests
             command: |
               python -m pytest 
         -run:
-            name: Flake8-tests
+            name: flake8-tests
             command : |
               flake8 --format=html --htmldir=flake-report --extend-ignore=E251,E501,E712 lettings/ profiles/ oc_lettings_site/
 
@@ -37,28 +37,24 @@ jobs:
     steps:
       - checkout
       - setup_remote_docker
-
-      # Image Docker
       - run:
-          name: Build-Image
+          name: build-image
           command: |
-
-
-      # Push Docker on Docker Hub.
+            docker build -t oc_lettings_django .
       - run:
-          name: Push-Image
+          name: push-image
           command: |
-            docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD" docker.io
+            docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASS" docker.io
             docker push lisa367/oc_lettings_django:latest
 
   deploy-app:
     docker:
       - image:circleci/python:3.8.6-browsers
-
     steps:
+      -checkout
       - run:
-          name: Deploy-Image
-          command: curl -X POST -d {} "$HOOK_URL"
+          name: deploy-image
+          command: curl -X GET $WEBHOOK_URL https://api.render.com/deploy/srv-cm08gn6d3nmc738lg3gg?key=zq1NrtVz-3I
 
 
 
@@ -67,5 +63,10 @@ workflows:
     jobs:
       - run-tests
       #- build-image
+          #requires:
+            #- run-tests
       #- deploy-app
+          #requires:
+            #- run-tests
+            #- build-image
 
