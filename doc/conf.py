@@ -32,9 +32,8 @@ exclude_patterns = [
     ".env",
     ".circleci",
     ".idea",
-    "**migrations/*",
-    "**lettings.migrations"
-    "**manage",
+    "**migrations",
+    "**lettings.migrations" "**manage.py",
 ]
 
 
