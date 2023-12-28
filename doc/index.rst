@@ -6,9 +6,12 @@
 Welcome to OC_Lettings's documentation!
 =======================================
 
-..include::oc_lettings_site.rst
-..include::lettings.rst
-..include::profiles.rst
+.. toctree::
+   :maxdepth: 2
+   :caption: Contents:
+
+   modules
+
 
 Indices and tables
 ==================
