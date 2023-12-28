@@ -8,7 +8,7 @@
 import os
 import sys
 
-# sys.path.insert(0, os.path.abspath(".."))
+sys.path.insert(0, os.path.abspath(".."))
 
 project = "OC_Lettings"
 copyright = "2023, Lisa L."
@@ -17,12 +17,13 @@ author = "Lisa L."
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-""" extensions = [
+extensions = [
     "sphinx.ext.autodoc",
-    "sphinx.ext.autosummary",
-] """
+    "sphinx.ext.viewcode",
+    # "sphinx.ext.autosummary",
+]
 
-extensions = []
+# extensions = []
 
 templates_path = ["_templates"]
 exclude_patterns = [
