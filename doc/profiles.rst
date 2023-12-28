@@ -1,4 +1,4 @@
-profiles package
+Profiles app
 ================
 
 
@@ -6,27 +6,7 @@ profiles package
    :maxdepth: 4
 
 
-
-Submodules
-----------
-
-profiles.admin module
----------------------
-
-.. automodule:: profiles.admin
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-profiles.apps module
---------------------
-
-.. automodule:: profiles.apps
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-profiles.models module
+profiles.models
 ----------------------
 
 .. automodule:: profiles.models
@@ -34,7 +14,7 @@ profiles.models module
    :undoc-members:
    :show-inheritance:
 
-profiles.tests module
+profiles.tests
 ---------------------
 
 .. automodule:: profiles.tests
@@ -42,7 +22,7 @@ profiles.tests module
    :undoc-members:
    :show-inheritance:
 
-profiles.urls module
+profiles.urls
 --------------------
 
 .. automodule:: profiles.urls
@@ -50,7 +30,7 @@ profiles.urls module
    :undoc-members:
    :show-inheritance:
 
-profiles.views module
+profiles.views
 ---------------------
 
 .. automodule:: profiles.views

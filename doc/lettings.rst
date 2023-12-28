@@ -1,30 +1,12 @@
-lettings package
+Lettings app
 ================
 
 .. toctree::
    :maxdepth: 4
 
 
-Submodules
-----------
 
-lettings.admin module
----------------------
-
-.. automodule:: lettings.admin
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-lettings.apps module
---------------------
-
-.. automodule:: lettings.apps
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-lettings.models module
+lettings.models
 ----------------------
 
 .. automodule:: lettings.models
@@ -32,7 +14,7 @@ lettings.models module
    :undoc-members:
    :show-inheritance:
 
-lettings.tests module
+lettings.tests
 ---------------------
 
 .. automodule:: lettings.tests
@@ -40,7 +22,7 @@ lettings.tests module
    :undoc-members:
    :show-inheritance:
 
-lettings.urls module
+lettings.urls
 --------------------
 
 .. automodule:: lettings.urls
@@ -48,7 +30,7 @@ lettings.urls module
    :undoc-members:
    :show-inheritance:
 
-lettings.views module
+lettings.views
 ---------------------
 
 .. automodule:: lettings.views

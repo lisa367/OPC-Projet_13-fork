@@ -1,4 +1,4 @@
-oc\_lettings\_site package
+OC\_Lettings\_Site app
 ==========================
 
 
@@ -6,34 +6,7 @@ oc\_lettings\_site package
    :maxdepth: 4
 
 
-Submodules
-----------
-
-oc\_lettings\_site.admin module
--------------------------------
-
-.. automodule:: oc_lettings_site.admin
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-oc\_lettings\_site.apps module
-------------------------------
-
-.. automodule:: oc_lettings_site.apps
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-oc\_lettings\_site.asgi module
-------------------------------
-
-.. automodule:: oc_lettings_site.asgi
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-oc\_lettings\_site.models module
+oc\_lettings\_site.models
 --------------------------------
 
 .. automodule:: oc_lettings_site.models
@@ -41,15 +14,8 @@ oc\_lettings\_site.models module
    :undoc-members:
    :show-inheritance:
 
-oc\_lettings\_site.settings module
-----------------------------------
 
-.. automodule:: oc_lettings_site.settings
-   :members:
-   :undoc-members:
-   :show-inheritance:
-
-oc\_lettings\_site.tests module
+oc\_lettings\_site.tests
 -------------------------------
 
 .. automodule:: oc_lettings_site.tests
@@ -57,7 +23,7 @@ oc\_lettings\_site.tests module
    :undoc-members:
    :show-inheritance:
 
-oc\_lettings\_site.urls module
+oc\_lettings\_site.urls
 ------------------------------
 
 .. automodule:: oc_lettings_site.urls
@@ -65,7 +31,7 @@ oc\_lettings\_site.urls module
    :undoc-members:
    :show-inheritance:
 
-oc\_lettings\_site.views module
+oc\_lettings\_site.views
 -------------------------------
 
 .. automodule:: oc_lettings_site.views
@@ -73,13 +39,6 @@ oc\_lettings\_site.views module
    :undoc-members:
    :show-inheritance:
 
-oc\_lettings\_site.wsgi module
-------------------------------
-
-.. automodule:: oc_lettings_site.wsgi
-   :members:
-   :undoc-members:
-   :show-inheritance:
 
 Module contents
 ---------------

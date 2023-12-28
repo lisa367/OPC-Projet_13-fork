@@ -20,7 +20,7 @@ author = "Lisa L."
 extensions = [
     "sphinx.ext.autodoc",
     "sphinx.ext.viewcode",
-    # "sphinx.ext.autosummary",
+    "sphinx_copybutton",
 ]
 
 # extensions = []
@@ -40,6 +40,10 @@ exclude_patterns = [
     "**/migrations/*",
     "./manage.py",
     "manage.py",
+    "**/apps.py",
+    "**/asgi.py",
+    "**/wsgi.py",
+    "**/settings.py",
 ]
 
 
