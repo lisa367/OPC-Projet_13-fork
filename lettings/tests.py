@@ -98,7 +98,7 @@ def test_wrong_letting_object(fake_db):
         assert assertTemplateUsed(response, "templates/500.html")
 
 
-""" 
+"""
 @pytest.mark.django_db
 def test_address_model():
     address = Address.objects.create(

@@ -5,13 +5,13 @@ from django.test import Client
 from django.urls import reverse, resolve
 
 
-# Create your tests here. 
+# Create your tests here.
 def test_index_view():
     client = Client()
 
     path = reverse('index')
     response = client.get(path)
-    content = response.content.decode()
+    # content = response.content.decode()
     # expected_content = ""
 
     # assert content == expected_content
@@ -26,8 +26,7 @@ def test_index_url():
     assert resolve(path).view_name == "index"
 
 
-""" 
+"""
 def test_dummy():
     assert 1
 """
-
