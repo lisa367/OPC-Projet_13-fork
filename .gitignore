@@ -5,3 +5,5 @@ venv
 .env
 .pytest_cache
 .coverage
+**manage.rst
+**migrations.rst

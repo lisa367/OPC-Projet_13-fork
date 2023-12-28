@@ -4,3 +4,5 @@ venv/
 .pytest_cache/
 doc/*
 .circleci/*
+flake-report/
+flake*
