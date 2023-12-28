@@ -33,6 +33,7 @@ exclude_patterns = [
     ".circleci",
     ".idea",
     "**migrations/*",
+    "**lettings.migrations"
     "**manage",
 ]
 
