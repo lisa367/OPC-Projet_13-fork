@@ -9,7 +9,7 @@ jobs:
   executor:
         name: python/default
         tag: '3.8.6'
-  test:
+  run-tests:
     steps:
         - checkout
         - python/install-packages:
@@ -28,7 +28,7 @@ jobs:
             paths:
               - .
 
-  build:
+  build-image:
     docker:
       - image: circleci/python:3.8.6-browsers
         auth:
@@ -51,7 +51,7 @@ jobs:
             docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASSWORD" docker.io
             docker push lisa367/oc_lettings_django:latest
 
-  deploy:
+  deploy-app:
     docker:
       - image:circleci/python:3.8.6-browsers
 
@@ -65,7 +65,7 @@ jobs:
 workflows:
   build_test_deploy:
     jobs:
-      - test
-      #- build
-      #- deploy
+      - run-tests
+      #- build-image
+      #- deploy-app
 
