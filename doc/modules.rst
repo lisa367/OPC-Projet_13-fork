@@ -5,6 +5,5 @@ OPC-Projet_13-fork
    :maxdepth: 4
 
    lettings
-   manage
    oc_lettings_site
    profiles
