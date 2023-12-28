@@ -9,7 +9,6 @@ from .models import Profile
 from oc_lettings_site.settings import DEBUG
 
 
-# Create your tests here.
 @pytest.fixture
 @pytest.mark.django_db
 def fake_db():
@@ -39,10 +38,6 @@ def test_profiles_index_view():
     client = Client()
     path = reverse('profiles:profiles_index')
     response = client.get(path)
-    # content = response.content.decode()
-    # expected_content = ""
-
-    # assert content == expected_content
     assert response.status_code == 200
     assertTemplateUsed(response, "profiles/index.html")
 
@@ -53,10 +48,6 @@ def test_profile_view(fake_db):
     user = fake_db["user"]
     path = reverse('profiles:profile',  kwargs={'username': user.username})
     response = client.get(path)
-    # content = response.content.decode()
-    # expected_content = ""
-
-    # assert content == expected_content
     assert response.status_code == 200
     assertTemplateUsed(response, "profiles/profile.html")
 
@@ -87,19 +78,5 @@ def test_wrong_profile_object(fake_db):
         client = Client()
         wrong_object_url = reverse("profiles:profile", kwargs={"username": "nobody"})
         response = client.get(wrong_object_url)
-        # content = response.content.decode()
-
         assert response.status_code == 500
         assert assertTemplateUsed(response, "templates/500.html")
-
-
-'''
-@pytest.mark.django_db
-def test_profile_model():
-    client = Client()
-    user = User.objects.create(username = "test_user", email="test_user@fauxmail.com" )
-    profile = Profile.objects.create(user=user.pk, favorite_city="Paris")
-    expected_value = "test_user"
-    assert str(profile) == expected_value
-
-'''
