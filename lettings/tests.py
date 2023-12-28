@@ -18,23 +18,22 @@ def fake_db():
             state = "FRANCE",
             zip_code = 75008,
             country_iso_code = "FR")
-    
+
     letting = Letting.objects.create(
             title = "Presidential private residence in Paris",
             address_id = 1)
-    
+
     return {"address": address, "letting": letting}
 
 
-
-@pytest.mark.django_db  
+@pytest.mark.django_db
 def test_address_model(fake_db):
     address_object = fake_db["address"]
     expected_value = "55 rue du Fbg Saint-Honoré"
     assert str(address_object) == expected_value
 
 
-@pytest.mark.django_db 
+@pytest.mark.django_db
 def test_letting_model(fake_db):
     letting_object = fake_db["letting"]
     expected_value = "Presidential private residence in Paris"
@@ -46,7 +45,7 @@ def test_lettings_index_view():
     client = Client()
     path = reverse("lettings:lettings_index")
     response = client.get(path)
-    content = response.content.decode()
+    # content = response.content.decode()
     # expected_content = ""
     # assert content == expected_content
     assert response.status_code == 200
@@ -56,9 +55,9 @@ def test_lettings_index_view():
 @pytest.mark.django_db
 def test_letting_object_view(fake_db):
     client = Client()
-    path = reverse('lettings:letting',  kwargs={'letting_id':1})
+    path = reverse('lettings:letting',  kwargs={'letting_id': 1})
     response = client.get(path)
-    content = response.content.decode()
+    # content = response.content.decode()
     # expected_content = ""
     # assert content == expected_content
     assert response.status_code == 200
@@ -70,7 +69,7 @@ def test_lettings_index_url():
     # Checks if the url named 'lettings_index' uses the 'lettings_index' view of the app lettings
     path = reverse('lettings:lettings_index')
     # path = "/lettings/"
-    
+
     assert path == "/lettings/"
     assert resolve(path).view_name == "lettings:lettings_index"
 
@@ -78,12 +77,10 @@ def test_lettings_index_url():
 @pytest.mark.django_db
 def test_letting_url(fake_db):
     # Checks if the url named 'letting' ¸ uses the 'letting' view of the app lettings
-    path = reverse('lettings:letting', kwargs={'letting_id':1})
+    path = reverse('lettings:letting', kwargs={'letting_id': 1})
     # path = "/lettings/1"
     assert path == "/lettings/1/"
     assert resolve(path).view_name == "lettings:letting"
-
-
 
 
 @pytest.mark.django_db
@@ -95,16 +92,14 @@ def test_wrong_letting_object(fake_db):
         client = Client()
         wrong_object_url = reverse("lettings:letting", kwargs={"letting_id": 0})
         response = client.get(wrong_object_url)
-        content = response.content.decode()
+        # content = response.content.decode()
 
         assert response.status_code == 500
         assert assertTemplateUsed(response, "templates/500.html")
 
 
-
-
 """ 
-@pytest.mark.django_db  
+@pytest.mark.django_db
 def test_address_model():
     address = Address.objects.create(
             number = 55,
@@ -116,8 +111,8 @@ def test_address_model():
     expected_value = "55 rue du Fbg Saint-Honoré"
     assert str(address) == expected_value
 
-    
-@pytest.mark.django_db 
+
+@pytest.mark.django_db
 def test_letting_model():
     address = Address.objects.create(
             number = 55,
@@ -126,7 +121,7 @@ def test_letting_model():
             state = "FRANCE",
             zip_code = 75008,
             country_iso_code = "FR")
-    
+
     address = Letting.objects.create(
             title = "Luxury private hotel in Paris",
             address_id = 1)
@@ -134,7 +129,7 @@ def test_letting_model():
     assert str(address) == expected_value
 
 
-@pytest.mark.django_db  
+@pytest.mark.django_db
 def test_book_model():
     client = Client()
     book = Book.objects.create(
