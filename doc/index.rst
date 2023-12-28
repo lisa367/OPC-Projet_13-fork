@@ -10,10 +10,7 @@ Welcome to OC_Lettings's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-
-   oc_lettings_site
-   profiles
-   lettings
+   modules
 
 Indices and tables
 ==================
