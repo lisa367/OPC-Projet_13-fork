@@ -5,6 +5,10 @@
 
 # -- Project information -----------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#project-information
+import os
+import sys
+
+sys.path.insert(0, os.path.abspath(".."))
 
 project = "OC_Lettings"
 copyright = "2023, Lisa L."
@@ -28,6 +32,8 @@ exclude_patterns = [
     ".env",
     ".circleci",
     ".idea",
+    "**migrations/*",
+    "**manage",
 ]
 
 
