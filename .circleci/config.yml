@@ -47,13 +47,13 @@ jobs:
       - run:
           name: "build_image"
           command: |
-            docker build -t oc_lettings_django:latest .
+            docker build -t $IMAGE_NAME:latest .
       - run:
           name: "push_image"
           command: |
             docker images
             echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-            docker push lisa367/openclassrooms-projet_13:latest
+            docker push $IMAGE_NAME:latest
 
   deploy_on_render:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
