@@ -11,10 +11,10 @@ jobs:
         tag: '3.8.6'
   run_tests:
     steps:
-        - checkout
-        - python/install-packages:
+        -checkout
+        -python/install-packages:
             pkg-manager: pip
-        - run:
+        -run:
             name: pytest-tests
             command: |
               python -m pytest
@@ -26,21 +26,21 @@ jobs:
             command : |
               flake8 --format=html --htmldir=flake-report --extend-ignore=E251,E501,E712 lettings/ profiles/ oc_lettings_site/
 
-        - persist_to_workspace:
+        -persist_to_workspace:
             root: .
             paths:
               - .
 
   build_image:
     docker:
-      - image: circleci/python:3.8.6-browsers
+      -image: circleci/python:3.8.6-browsers
         #auth:
           #username: $DOCKERHUB_USERNAME
           #password: $DOCKERHUB_TOKEN
     steps:
-      - checkout
-      - setup_remote_docker
-      - run:
+      -checkout
+      -setup_remote_docker
+      -run:
           name: build-image
           command: |
             docker build -t oc_lettings_django:latest .
@@ -55,7 +55,7 @@ jobs:
       - image:circleci/python:3.8.6-browsers
     steps:
       -checkout
-      - run:
+      -run:
           name: deploy-image
           command: curl -X GET $WEBHOOK_URL https://api.render.com/deploy/srv-cm08gn6d3nmc738lg3gg?key=zq1NrtVz-3I
 
