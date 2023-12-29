@@ -27,7 +27,8 @@ jobs:
             python -m pytest
       - run:
           name: "run_flake8"
-          command: "echo Hello, World!"
+          command: |
+            flake8 --extend-ignore=E251,E501,E712 lettings/ profiles/ oc_lettings_site/
 
   build_docker_image:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
