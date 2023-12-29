@@ -51,7 +51,7 @@ jobs:
       - run:
           name: "push_image"
           command: |
-            docker login -u "$DOCKERHUB_USERNAME" --password-stdin "$DOCKERHUB_TOKEN" docker.io
+            docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_TOKEN"
             docker push lisa367/oc_lettings_django:latest
 
   deploy_on_render:
