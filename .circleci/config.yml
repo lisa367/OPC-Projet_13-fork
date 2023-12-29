@@ -7,22 +7,22 @@ orbs:
 
 jobs:
   executor:
-        name: python/default
-        tag: '3.8.6'
+      name: python/default
+      tag: '3.8.6'
 
   run_tests:
     steps:
-        - checkout
-        - python/install-packages:
-            pkg-manager: pip
-        - run:
-            name: pytest-tests
-            command: |
-              python -m pytest
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: pytest-tests
+          command: |
+            python -m pytest
             
           # coverage run -m pytest 
           # coverage report --fail-under=80
-        - run:
+      - run:
             name: flake8
             command : |
               flake8 --format=html --htmldir=flake-report --extend-ignore=E251,E501,E712 lettings/ profiles/ oc_lettings_site/
@@ -34,14 +34,14 @@ jobs:
 
   build_image:
     docker:
-      -image: circleci/python:3.8.6-browsers
-        #auth:
-          #username: $DOCKERHUB_USERNAME
-          #password: $DOCKERHUB_TOKEN
+      - image: circleci/python:3.8.6-browsers
+        auth:
+          username: $DOCKERHUB_USERNAME
+          password: $DOCKERHUB_TOKEN
     steps:
-      -checkout
-      -setup_remote_docker
-      -run:
+      - checkout
+      - setup_remote_docker
+      - run:
           name: build-image
           command: |
             docker build -t oc_lettings_django:latest .
@@ -58,7 +58,7 @@ jobs:
       - checkout
       - run:
           name: deploy-image
-          command: curl -X GET $WEBHOOK_URL https://api.render.com/deploy/srv-cm08gn6d3nmc738lg3gg?key=zq1NrtVz-3I
+          command: curl -X GET $WEBHOOK_URL
 
 
 
