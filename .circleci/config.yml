@@ -23,8 +23,8 @@ jobs:
       - run:
           name: "run_pytest"
           command: |
-          python manage.py collectstatic
-          python -m pytest
+            python manage.py collectstatic
+            python -m pytest
       - run:
           name: "run_flake8"
           command: "echo Hello, World!"
