@@ -66,8 +66,8 @@ jobs:
     steps:
       - checkout
       - run:
-          name: "run_test"
-          command: "echo Hello, World!"
+          name: "deploy_container"
+          command: curl -X GET $WEBHOOK_URL
       - run:
           name: "run_test"
           command: "echo Hello, World!"
@@ -80,4 +80,6 @@ workflows:
       - build_docker_image:
           requires:
             - run_tests_suite
-      - deploy_on_render
+      - deploy_on_render:
+          requires:
+            - build_docker_image
