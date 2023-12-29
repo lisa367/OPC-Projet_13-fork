@@ -22,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # ALLOWED_HOSTS = ["*"]
 
 SECRET_KEY = os.environ.get('SECRET_KEY', 'secret_key')
-DEBUG = os.environ.get('DEBUG', True)
+DEBUG = os.environ.get('DEBUG')
 DSN = os.environ.get('DSN')
 ALLOWED_HOSTS = [".onrender.com", "localhost", "127.0.0.1"]
 
