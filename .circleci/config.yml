@@ -21,10 +21,12 @@ jobs:
       - python/install-packages:
           pkg-manager: pip
       - run:
-          name: "run_test"
-          command: python -m pytest
+          name: "run_pytest"
+          command: |
+          python manage.py collectstatic
+          python -m pytest
       - run:
-          name: "run_test"
+          name: "run_flake8"
           command: "echo Hello, World!"
 
   build_docker_image:
@@ -43,7 +45,7 @@ jobs:
           name: "run_test"
           command: "echo Hello, World!"
 
-  deployment_on_render:
+  deploy_on_render:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
     # See: https://circleci.com/docs/configuration-reference/#executor-job
     docker:
@@ -61,8 +63,8 @@ jobs:
 # Orchestrate jobs using workflows
 # See: https://circleci.com/docs/configuration-reference/#workflows
 workflows:
-  say-hello-workflow:
+  oc_lettings-deployement:
     jobs:
       - run_tests_suite
       - build_docker_image
-      - deployment_on_render
+      - deploy_on_render
