@@ -9,7 +9,7 @@ jobs:
   executor:
         name: python/default
         tag: '3.8.6'
-  run-tests:
+  run_tests:
     steps:
         - checkout
         - python/install-packages:
@@ -17,37 +17,40 @@ jobs:
         - run:
             name: pytest-tests
             command: |
-              python -m pytest 
+              python -m pytest
+            
+          # coverage run -m pytest 
+          # coverage report --fail-under=80
         -run:
             name: flake8-tests
             command : |
               flake8 --format=html --htmldir=flake-report --extend-ignore=E251,E501,E712 lettings/ profiles/ oc_lettings_site/
 
         - persist_to_workspace:
-            root: 
+            root: .
             paths:
               - .
 
-  build-image:
+  build_image:
     docker:
       - image: circleci/python:3.8.6-browsers
-        auth:
-          username: $DOCKERHUB_USERNAME
-          password: $DOCKERHUB_PASSWORD
+        #auth:
+          #username: $DOCKERHUB_USERNAME
+          #password: $DOCKERHUB_TOKEN
     steps:
       - checkout
       - setup_remote_docker
       - run:
           name: build-image
           command: |
-            docker build -t oc_lettings_django .
+            docker build -t oc_lettings_django:latest .
       - run:
           name: push-image
           command: |
-            docker login -u "$DOCKERHUB_USERNAME" -p "$DOCKERHUB_PASS" docker.io
+            docker login -u "$DOCKERHUB_USERNAME" --password-stdin "$DOCKERHUB_TOKEN" docker.io
             docker push lisa367/oc_lettings_django:latest
 
-  deploy-app:
+  deploy_app:
     docker:
       - image:circleci/python:3.8.6-browsers
     steps:
@@ -61,11 +64,11 @@ jobs:
 workflows:
   build_test_deploy:
     jobs:
-      - run-tests
-      #- build-image
+      - run_tests
+      #- build_image
           #requires:
             #- run-tests
-      #- deploy-app
+      #- deploy_app
           #requires:
             #- run-tests
             #- build-image
