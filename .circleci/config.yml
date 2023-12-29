@@ -16,7 +16,7 @@ jobs:
       - checkout
       - run:
           name: "run_test"
-          command: "echo Hello, World!"
+          command: pytest
       - run:
           name: "run_test"
           command: "echo Hello, World!"
