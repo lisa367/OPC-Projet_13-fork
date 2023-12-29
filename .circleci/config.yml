@@ -52,8 +52,8 @@ jobs:
           name: "push_image"
           command: |
             docker images
-            #docker login -u "$DOCKERHUB_USERNAME" --password-stdin "$DOCKERHUB_TOKEN"
-            #docker push lisa367/openclassrooms-projet_13:latest
+            echo "$DOCKERHUB_TOKEN" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker push lisa367/openclassrooms-projet_13:latest
 
   deploy_on_render:
     # Specify the execution environment. You can specify an image from Docker Hub or use one of our convenience images from CircleCI's Developer Hub.
