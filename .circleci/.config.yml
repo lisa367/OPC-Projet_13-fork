@@ -22,7 +22,7 @@ jobs:
           # coverage run -m pytest 
           # coverage report --fail-under=80
         -run:
-            name: flake8-tests
+            name: flake8
             command : |
               flake8 --format=html --htmldir=flake-report --extend-ignore=E251,E501,E712 lettings/ profiles/ oc_lettings_site/
 
