@@ -7,8 +7,8 @@ orbs:
 
 jobs:
   executor:
-      name: python/default
-      tag: '3.8.6'
+    name: python/default
+    tag: '3.8.6'
 
   run_tests:
     steps:
@@ -17,20 +17,12 @@ jobs:
           pkg-manager: pip
       - run:
           name: pytest-tests
-          command: |
-            python -m pytest
-            
+          command: python -m pytest
           # coverage run -m pytest 
           # coverage report --fail-under=80
       - run:
-            name: flake8
-            command : |
-              flake8 --format=html --htmldir=flake-report --extend-ignore=E251,E501,E712 lettings/ profiles/ oc_lettings_site/
-
-        - persist_to_workspace:
-            root: .
-            paths:
-              - .
+          name: flake8
+          command : flake8 --format=html --extend-ignore=E251,E501,E712 lettings/ profiles/ oc_lettings_site/
 
   build_image:
     docker:
@@ -65,11 +57,12 @@ jobs:
 workflows:
   build_test_deploy:
     jobs:
+      -executor
       - run_tests
-      #- build_image
+      - build_image
           #requires:
             #- run-tests
-      #- deploy_app
+      - deploy_app
           #requires:
             #- run-tests
             #- build-image
