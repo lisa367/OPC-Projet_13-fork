@@ -75,3 +75,18 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 - Pour activer l'environnement virtuel, `.\venv\Scripts\Activate.ps1` 
 - Remplacer `which <my-command>` par `(Get-Command <my-command>).Path`
+
+
+### Déploiement
+
+- Créer un compte sur les plateformes de Render et CircleCI
+- Sur Render
+    - créer un nouveau service web (onglet  'Web Service')
+    - dans la configuration du projet, ajouter un nom et positionner le 'Runtime' sur Docker
+    - cliquer sur le bouton 'Advanced' et s'assurer que 'Auto Derploy' est bien positionné sur "No"
+    - définir les variables d'environnement pour DEBUG, SECRET_KEY et DSN
+    - dans l'onglet 'Settings', copier le 'Deploy Hook'
+
+- Sur CircleCI
+    - suivre le répertoire Github associé au projet et sélectionner la branche master
+    - définir les variables d'environnement pour DOCKER_USERNAME, DOCKER_TOKEN, IMAGE_NAME et WEBHOOK (le hook récupéré précédemment sur Render)
