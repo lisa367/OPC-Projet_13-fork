@@ -3,7 +3,9 @@
 venv
 .venv
 .env
+.idea
 .pytest_cache
 .coverage
 **manage.rst
 **migrations.rst
+staticfiles

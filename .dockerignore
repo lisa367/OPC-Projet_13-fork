@@ -6,3 +6,4 @@ doc/*
 .circleci/*
 flake-report/
 flake*
+staticfiles
