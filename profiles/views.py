@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Profile
 
 
@@ -26,6 +26,6 @@ def profile(request, username):
     Returns:
         _type_: Returns the template that displays the information of one profile object
     """
-    profile = Profile.objects.get(user__username=username)
+    profile = get_object_or_404(Profile, user__username=username)
     context = {'profile': profile}
     return render(request, 'profiles/profile.html', context)
