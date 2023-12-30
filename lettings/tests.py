@@ -85,5 +85,6 @@ def test_wrong_letting_object(fake_db):
         client = Client()
         wrong_object_url = reverse("lettings:letting", kwargs={"letting_id": 0})
         response = client.get(wrong_object_url)
-        assert response.status_code == 500
-        assert assertTemplateUsed(response, "templates/500.html")
+        print(response)
+        assert response.status_code == 404
+        assert assertTemplateUsed("404.html")

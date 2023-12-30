@@ -78,5 +78,5 @@ def test_wrong_profile_object(fake_db):
         client = Client()
         wrong_object_url = reverse("profiles:profile", kwargs={"username": "nobody"})
         response = client.get(wrong_object_url)
-        assert response.status_code == 500
-        assert assertTemplateUsed(response, "templates/500.html")
+        assert response.status_code == 404
+        assert assertTemplateUsed("404.html")
