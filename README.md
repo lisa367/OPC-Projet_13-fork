@@ -18,7 +18,28 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 #### Cloner le repository
 
 - `cd /path/to/put/project/in`
-- `git clone https://github.com/OpenClassrooms-Student-Center/Python-OC-Lettings-FR.git`
+- `git clone https://github.com/lisa367/OPC-Projet_13-fork.git`
+
+#### Architecture simplifiée du projet
+
+<pre>
+OPC-Projet_13-fork/
+  | lettings/
+  | profiles/
+  | oc_lettings_site/
+
+  | templates/
+  | static/
+
+  | doc/
+  | .circleci/
+
+  | manage.py
+  | oc-lettings-site.sqlite3
+  | requirements.txt
+  | Dockerfile
+
+</pre>
 
 #### Créer l'environnement virtuel
 
@@ -53,6 +74,13 @@ Dans le reste de la documentation sur le développement local, il est supposé q
 - `source venv/bin/activate`
 - `pytest`
 
+#### Couverture de tests
+
+- `cd /path/to/Python-OC-Lettings-FR`
+- `source venv/bin/activate`
+- `coverage run -m pytest`
+- `coverage report --format=html -fail-under=80`
+
 #### Base de données
 
 - `cd /path/to/Python-OC-Lettings-FR`
@@ -78,6 +106,10 @@ Utilisation de PowerShell, comme ci-dessus sauf :
 
 
 ### Déploiement
+- A chaque nouveau commit poussé sur GitHub, le pipeline CI/CD se lance :
+    - les tests sont effectués
+    - une nouvelle image Docker est créée et poussée sur DockerHub
+    - un nouveau conteneur est déployé sur Render
 
 - Créer un compte sur les plateformes de Render et CircleCI
 - Sur Render
