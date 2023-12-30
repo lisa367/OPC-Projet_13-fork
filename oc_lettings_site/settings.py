@@ -1,6 +1,7 @@
 import os
+import logging
 import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
+from sentry_sdk.integrations.django import DjangoIntegration, LoggingIntegration
 from dotenv import load_dotenv
 from pathlib import Path
 
@@ -128,10 +129,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / "static", ]
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
+logging.basicConfig(level=logging.WARNING)
 
 sentry_sdk.init(
     # dsn="https://examplePublicKey@o0.ingest.sentry.io/0",
-    # dsn="https://68bfc3daa05f8f7ee1a932ac1161f71b@o4506244442554368.ingest.sentry.io/4506270374494208",
     dsn=DSN,
     traces_sample_rate=1.0,
     profiles_sample_rate=1.0,
@@ -142,6 +143,10 @@ sentry_sdk.init(
             middleware_spans=True,
             signals_spans=False,
             cache_spans=False,
+        ),
+        LoggingIntegration(
+            level=logging.WARNING,
+            event_level=logging.WARNING
         ),
     ],
 )
